@@ -6,6 +6,9 @@ db = mysql.connector.connect(user='todo',
                              host='localhost',
                              database='tododb')
 
+def guideFunc():
+    print("This is console simple note. Press 'n' to add new note, 's' to show all notes, 'del' to delete the note, 'e' to exit from app, 'h' to show advice)")
+
 def getNotes():
     title_var = input("Write a title: ")
     note_var = input("Write a notes: ")
@@ -35,11 +38,15 @@ def showItems():
     rez = cur.fetchall()
 
     for i in rez:
-        print(" Note number " + str(i[0]), end=" ")
+        print("# " + str(i[0]), end=" ")
         print(str(i[1]), end="  ")
         print(" - " + str(i[2]))
 
     return
+
+#main part
+
+guideFunc()
 
 menu = ""
 
@@ -52,6 +59,8 @@ while menu != "e":
     elif menu == "d":
         delI = int(input("Enter note id, which you want to delete: "))
         delItem(delI)
+    elif menu =="h":
+        guideFunc()
     menu = input("Enter the command: ")
     # else:
     #     print("Incorrect command! Try again")
