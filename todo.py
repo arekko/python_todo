@@ -1,3 +1,6 @@
+from datetime import date
+from datetime import time
+from datetime import datetime
 import mysql.connector
 
 
@@ -5,6 +8,32 @@ db = mysql.connector.connect(user='todo',
                              password='todo',
                              host='localhost',
                              database='tododb')
+
+#main part
+def main():
+    guideFunc()
+
+    menu = ""
+
+    while menu != "e":
+        # menu = input("Enter the command: ")
+        if menu == "show" or menu == "s":
+            showItems() 
+        elif menu == "new" or menu == "n":
+            getNotes()
+        elif menu == "d":
+            delI = int(input("Enter note id, which you want to delete: "))
+            delItem(delI)
+        elif menu =="h":
+            guideFunc()
+        menu = input("Enter the command: ")
+        # else:
+        #     print("Incorrect command! Try again")
+
+
+    # printFunc()
+    db.close()
+
 
 def guideFunc():
     print("This is console simple note. Press 'n' to add new note, 's' to show all notes, 'del' to delete the note, 'e' to exit from app, 'h' to show advice)")
@@ -44,27 +73,6 @@ def showItems():
 
     return
 
-#main part
 
-guideFunc()
-
-menu = ""
-
-while menu != "e":
-    # menu = input("Enter the command: ")
-    if menu == "show" or menu == "s":
-        showItems() 
-    elif menu == "new" or menu == "n":
-        getNotes()
-    elif menu == "d":
-        delI = int(input("Enter note id, which you want to delete: "))
-        delItem(delI)
-    elif menu =="h":
-        guideFunc()
-    menu = input("Enter the command: ")
-    # else:
-    #     print("Incorrect command! Try again")
-
-
-# printFunc()
-db.close()
+if __name__== "__main__":
+    main()
