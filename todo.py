@@ -1,4 +1,3 @@
-
 import mysql.connector
 
 
@@ -12,6 +11,12 @@ def getNotes():
     note_var = input("Write a notes: ")
 
     getFunc(title_var, note_var)
+
+def delItem(delNote):
+    cur = db.cursor()
+    sql = "DELETE FROM todo WHERE ID = '%i'" % (delNote)
+    cur.execute(sql)
+    db.commit()
 
 
 def getFunc(title, art):
@@ -44,6 +49,9 @@ while menu != "e":
         showItems() 
     elif menu == "new" or menu == "n":
         getNotes()
+    elif menu == "d":
+        delI = int(input("Enter note id, which you want to delete: "))
+        delItem(delI)
     menu = input("Enter the command: ")
     # else:
     #     print("Incorrect command! Try again")
